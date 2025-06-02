@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>LTspice converter</title>
+  </head>
+
+
+<!-----ヘッダ----->
+  <header class="text-gray-600 body-font bg-gray-200">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <span class="ml-3 text-xl">LTspice converter</span>
+    </a>
+  </div>
+</header>
+<!-----ヘッダ終わり----->
+
+  <body>
+
+    <!-- ファイル選択 -->
+    <div class="flex justify-center items-center gap-4 p-16">
+
+      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-16 rounded" id="fileSelect" type="file"type="button">ファイルを選択
+
+      <input
+        type="file"
+        id="fileInput"
+        accept=".txt"
+        style="display: none;"
+      />
+
+      </button>
+    </div>
+
+    <div
+      id="fileInfo"
+      style="
+        display: none;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+      "
+    ></div>
+
+    <div id="status" style="margin: 10px 0"></div>
+
+    <div
+      id="errorDetails"
+      style="
+        display: none;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid red;
+        background-color: #ffe6e6;
+      "
+    ></div>
+
+    <div
+      id="preview"
+      style="
+        display: none;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+      "
+    >
+      <strong>プレビュー:</strong>
+      <pre
+        id="previewContent"
+        style="white-space: pre-wrap; font-family: monospace; font-size: 12px"
+      ></pre>
+    </div>
+
+    <button
+      class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-16 rounded"
+      id="downloadBtn"
+      disabled
+      onclick="downloadCSV()"
+    >
+      CSVをダウンロード
+    </button>
+
+    <script src="main.js"></script>
+  </body>
+</html>
