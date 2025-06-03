@@ -1,6 +1,53 @@
 let convertedCSV = '';
 let originalFileName = '';
 
+
+
+// =========================
+//  ファイルのDrag&Drop
+// =========================
+window.onload = () => {
+	const textarea = document.querySelector("#dropZone");
+	initDnDReadText(textarea, (text, event) => textarea.value = text );
+};
+
+/** ファイルのドラッグ＆ドロップでテキストファイルを読む。
+ @param {HTMLElement} el ドロップを受ける要素。
+ @param {Callback} callback(text, event) ファイル読み込みを完了したときの処理。
+    text: 読んだテキスト
+ */
+function initDnDReadText(el, callback){
+	// ファイルがドロップされたときの処理。
+	el.addEventListener("drop", event => {
+    console.log("drop");
+
+		// デフォルトの動作を禁止する。
+		event.preventDefault();
+
+		// 1個目のファイルだけ読む例。
+		const file = event.dataTransfer.files[0];
+		const reader = new FileReader();
+		// ファイルを読み終わったら callback を実行する。
+		reader.onload = event => callback(event.target.result, event);
+		// テキストファイルを utf-8 と見なして読む。
+		reader.readAsText(file);
+
+
+        // const file = e.target.files[0];
+        if (file) processFile(file);
+        console.log("ファイルを選択しました！");
+	});
+
+	// ドロップ禁止にならないようにする。
+	el.addEventListener("dragover", event => event.preventDefault());
+}
+
+// ===========END===========
+
+
+// =========================
+//  ファイルの選択（ボタン）
+// =========================
 document.getElementById('fileInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (file) processFile(file);
@@ -29,6 +76,8 @@ function processFile(file) {
     reader.onerror = () => showError('読み込みエラー', new Error('ファイルの読み込みに失敗'));
     reader.readAsText(file);
 }
+// =========================
+
 
 function convertTxtToCSV(content) {
     const lines = content.trim().split('\n');
@@ -100,11 +149,8 @@ function showWarning(title, warnings) {
 }
 
 function createWarningDiv() {
-    const div = document.createElement('div');
-    div.id = 'warningDetails';
-    div.style.cssText = 'margin: 10px 0; padding: 10px; border: 1px solid orange; background-color: #fff3cd;';
+    div = getElementById('warningDetails');
     document.getElementById('errorDetails').parentNode.appendChild(div);
-    return div;
 }
 
 function showFileInfo(file) {
@@ -116,8 +162,8 @@ function showFileInfo(file) {
 
 function showPreview(csv) {
     const lines = csv.split('\n').slice(0, 6);
-    document.getElementById('previewContent').textContent = 
-        lines.join('\n') + (csv.split('\n').length > 6 ? '\n...' : '');
+    document.getElementById('previewContent').innerHTML = 
+        '<strong>プレビュー：</strong><br>'+ lines.join('\n') + (csv.split('\n').length > 6 ? '\n...' : '');
     document.getElementById('preview').style.display = 'block';
 }
 
