@@ -8,19 +8,107 @@
   </head>
 
 
-<!-----ヘッダ----->
-  <header class="text-gray-600 body-font bg-gray-200">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-      <span class="ml-3 text-xl">LTspice converter</span>
-    </a>
-  </div>
-</header>
-<!-----ヘッダ終わり----->
-
   <body>
+<!-- ---------------------------コピペ始まり-------------------------------------------------->
 
-    <!-- ファイル選択 -->
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <div class="container mx-auto px-4 py-8">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-blue-900 mb-2">LTspice converter</h1>
+        <p class="text-blue-700 text-lg">Convert your text files to CSV format quickly and easily</p>
+      </div>
+
+      <div class="max-w-2xl mx-auto space-y-6">
+        <!-- File Upload Card -->
+        <div class="border-blue-200 shadow-lg border rounded-lg overflow-hidden">
+          <div class="bg-blue-600 text-white rounded-t-lg p-4">
+            <div class="flex items-center gap-2 font-bold">
+              <!-- <FileText class="h-5 w-5" /> -->
+              Upload Text File
+            </div>
+            <p class="text-blue-100">Select a .txt file to convert to CSV format</p>
+          </div>
+          <div class="p-6">
+            <div class="border-2 border-dashed rounded-lg p-8 text-center transition-colors border-blue-300 hover:border-blue-400">
+              <!-- JavaScriptで file 状態に応じて内容を切り替える -->
+              <div class="space-y-4">
+                <!-- <Upload class="h-12 w-12 text-blue-400 mx-auto" /> -->
+                <div>
+                  <p class="text-lg font-medium text-blue-800 mb-2">Drop your .txt file here</p>
+                  <p class="text-blue-600 mb-4">or</p>
+                  <label for="file-input">
+
+
+        <!-- ファイルを選択ボタン-->
+          <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded" onclick="document.getElementById('fileInput').click()">
+            ファイルを選択
+            <input type="file" id="fileInput" accept=".txt" style="display: none;">
+          </button>
+
+                    </button>
+                  </label>
+                  <input id="file-input" type="file" accept=".txt" class="hidden" />
+                </div>
+              </div>
+            </div>
+
+            <!-- JSでfileがあるときに表示 -->
+
+            <div class="space-y-4">
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversion Card -->
+        <div class="border-blue-200 shadow-lg border rounded-lg overflow-hidden">
+          <div class="bg-blue-700 text-white rounded-t-lg p-4">
+            <div class="flex items-center gap-2 font-bold">
+              <!-- <Table class="h-5 w-5" /> -->
+              Convert to CSV
+            </div>
+          </div>
+          <div class="p-6">
+            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg">
+              Convert to CSV
+            </button>
+
+
+
+          </div>
+        </div>
+
+        <!-- 変換が完了しました！-->
+                <div id="status" style="margin: 10px 0;"></div>
+                <button id="downloadBtn" disabled onclick="downloadCSV()">CSVをダウンロード</button>
+
+
+                    <div id="fileInfo" ></div>
+    <div id="errorDetails" ></div>
+    <div id="preview" >
+        <strong>プレビュー:</strong>
+        <pre id="previewContent" ></pre>
+    </div>
+
+
+        <!-- カード -->
+        <div class="border-blue-200 bg-blue-50 rounded-lg overflow-hidden">
+          <div class="p-6">
+            <h3 class="font-semibold text-blue-900 mb-3">How it works:</h3>
+            <ol class="space-y-2 text-blue-800 list-decimal list-inside">
+              <li>Upload your .txt file by clicking "Choose File" or dragging it into the upload area</li>
+              <li>Select the delimiter type or let the tool auto-detect it</li>
+              <li>Click "Convert to CSV" to process your file</li>
+              <li>Download the converted CSV file to your device</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- ---------------------------コピペ終わり-------------------------------------------------->
+
+    <!-- ファイル選択
     <div class="flex justify-center items-center gap-4 p-16">
 
       <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-16 rounded" id="fileSelect" type="file"type="button">ファイルを選択
@@ -82,7 +170,7 @@
       onclick="downloadCSV()"
     >
       CSVをダウンロード
-    </button>
+    </button> -->
 
     <script src="main.js"></script>
   </body>
