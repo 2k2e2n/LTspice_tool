@@ -69,12 +69,26 @@ function processFile(file) {
             console.log("変換が完了しました！");
             showPreview(convertedCSV);
             document.getElementById('downloadBtn').disabled = false;
+            // 成功メッセージを表示
+            document.getElementById('successful').style.display = 'block';
         } catch (error) {
             showError('変換エラー', error);
+
+            // 失敗メッセージを表示
+            document.getElementById('failed').style.display = 'block';
         }
     };
-    reader.onerror = () => showError('読み込みエラー', new Error('ファイルの読み込みに失敗'));
+    reader.onerror = () => {
+        showError('読み込みエラー', new Error('ファイルの読み込みに失敗'));
+        
+        // 失敗メッセージを表示
+        document.getElementById('failed').style.display = 'block';
+    };
     reader.readAsText(file);
+
+
+    // 失敗メッセージを表示
+    document.getElementById('failed').style.display = 'block';
 }
 // =========================
 
@@ -186,4 +200,8 @@ function resetUI() {
     document.getElementById('downloadBtn').disabled = true;
     const warning = document.getElementById('warningDetails');
     if (warning) warning.style.display = 'none';
+
+    // 成否メッセージを非表示にする
+    document.getElementById('successful').style.display = 'none';
+    document.getElementById('failed').style.display = 'none';
 }
