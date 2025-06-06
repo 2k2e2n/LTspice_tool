@@ -88,7 +88,7 @@ function processFile(file) {
 
 
     // 失敗メッセージを表示
-    document.getElementById('failed').style.display = 'block';
+    //document.getElementById('failed').style.display = 'block';
 }
 // =========================
 
